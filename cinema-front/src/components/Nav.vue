@@ -1,0 +1,45 @@
+<template>
+  <nav class="navbar navbar-expand fixed-top">
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:5173/">Movies</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Profile</a>
+          </li>
+        </div>
+      </div>
+    </div>
+  </nav>
+</template>
+<style>
+
+
+nav a:hover {
+  background-color: white;
+  color:black;
+}
+
+.navbar {
+  --color-background: var(--vt-c-black);
+  box-shadow: 0 14px 80px rgba(34, 35, 58, 0.2);
+}
+.navbar-nav {
+  display: flex;
+}
+.nav-item {
+  padding: 10px;
+}
+.nav-link {
+  color:white;
+}
+.profileIcon:hover {
+  background-color: white;
+}
+
+</style>
+<script setup>
+import IconProfile from "@/components/icons/IconProfile.vue";
+</script>
