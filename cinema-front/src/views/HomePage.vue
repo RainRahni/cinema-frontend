@@ -1,5 +1,6 @@
 <template>
   <div class="whole-page">
+    <a>
     <div class="movie-item">
         <div class="movie-group">
           <img class="stack-img" src="~@/assets/movie-one.jpg">
@@ -11,6 +12,8 @@
           </div>
         </div>
     </div>
+    </a>
+    <a>
     <div class="movie-item">
       <div class="movie-group">
         <img class="stack-img" src="~@/assets/movie-two.jpg">
@@ -22,6 +25,8 @@
         </div>
       </div>
     </div>
+    </a>
+    <a href="www.google.com" target="_blank">
     <div class="movie-item">
       <div class="movie-group">
         <img class="stack-img" src="~@/assets/movie-three.jpg">
@@ -33,6 +38,8 @@
         </div>
       </div>
     </div>
+    </a>
+    <a>
     <div class="movie-item">
       <div class="movie-group">
         <img class="stack-img" src="~@/assets/movie-four.jpg">
@@ -44,6 +51,7 @@
         </div>
       </div>
     </div>
+    </a>
   </div>
 </template>
 <style>
@@ -58,10 +66,10 @@
     color: black;
     border-radius: 10px;
   }
+
   .stack-img {
     display: flex;
     float:right;
-
     width: 10em;
     height: 10em;
     padding: 10px;
