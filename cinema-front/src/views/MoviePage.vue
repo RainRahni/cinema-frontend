@@ -7,8 +7,11 @@
         <h2 style="color: black">{{ movie.language }}</h2>
         <h2 style="color: black">{{ movie.genre }}</h2>
       </div>
-      <img src="@/assets/seat-plan.png">
-      <p style="color: black">{{ falseSeats }}</p>
+      <div class="seat-plan">
+        <img src="@/assets/seat-plan.png">
+        <p style="color: black">{{ falseSeats }}</p>
+      </div>
+
       <h1 style="color: black">mida soovitatakse</h1>
       <div class="forms">
         <div>
@@ -46,14 +49,12 @@
   display: grid;
   justify-content: space-around;
 }
-.stack-img {
+.seat-plan {
   display: flex;
-  float:right;
-  //width: 10em;
-  //height: 9em;
-  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
 .movie-info {
   display: flex;
   flex-direction: column;
@@ -81,6 +82,10 @@ import axios from 'axios';
 
 const movieId = ref(window.location.pathname.split('/').pop());
 const movie = ref({});
+const userName = ref('');
+const email = ref('');
+const rowNumber = ref(0);
+const seatNumber = ref(0);
 onMounted(async () => {
   try {
     const response = await axios.get(`http://localhost:8080/movie/${movieId.value}`);
@@ -114,20 +119,30 @@ const falseSeats = computed(() => {
     let rowSeats = [];
     row.forEach((seat, seatIndex) => {
       if (!seat) {
-        rowSeats.push(`Seat ${seatIndex + 1}`);
+        rowSeats.push(`Seat ${seatIndex + 1} `);
       }
     });
     if (rowSeats.length > 0) {
-      falseSeats.push(`Row ${rowIndex + 1}: ${rowSeats.join(', ')}`);
+      falseSeats.push(`ROW ${rowIndex + 1}: ${rowSeats.join(', ')} `);
     }
-
   return falseSeats.join('');
 });
-
-
   return falseSeats.join('');
 });
-
+const finishBooking = async () => {
+  try {
+    const response = await axios.post('http://localhost:8080/user/', {
+      name: userName.value,
+      email: email.value,
+      rowNumber: rowNumber.value,
+      seatNumber: seatNumber.value,
+      movieId: movieId.value
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
 </script>
