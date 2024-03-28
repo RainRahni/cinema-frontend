@@ -1,79 +1,100 @@
 <template>
   <div class="whole-page">
-    <a>
-    <div class="movie-item">
+    <a v-for="movie in movies.values()" :key="movie.id">
+      <div class="movie-item">
         <div class="movie-group">
-          <img class="stack-img" src="~@/assets/movie-one.jpg">
-          <div class="ed-info" style="padding-left: 2%">
-            <h1>Shadow Strike</h1>
-            <h2>19:10</h2>
-            <h4>English</h4>
-            <h4>Action</h4>
+          <img v-if="movie.genre === 'Action'" class="stack-img" src="~@/assets/movie-one.jpg">
+          <img v-else-if="movie.genre === 'Romance'" class="stack-img" src="~@/assets/movie-three.jpg">
+          <div class="movie-info" style="padding-left: 2%">
+            <h1>{{ movie.name }}</h1>
+            <h2>{{ formatTime(movie.startTime) }}</h2>
+            <h4>{{ movie.language }}</h4>
+            <h4>{{ movie.genre }}</h4>
           </div>
         </div>
-    </div>
-    </a>
-    <a>
-    <div class="movie-item">
-      <div class="movie-group">
-        <img class="stack-img" src="~@/assets/movie-two.jpg">
-        <div class="movie-info" style="padding-left: 2%">
-          <h1>Heartstrings</h1>
-          <h2>15:00</h2>
-          <h4>English</h4>
-          <h4>Romance</h4>
-        </div>
       </div>
-    </div>
-    </a>
-    <a href="www.google.com" target="_blank">
-    <div class="movie-item">
-      <div class="movie-group">
-        <img class="stack-img" src="~@/assets/movie-three.jpg">
-        <div class="ed-info" style="padding-left: 2%">
-          <h1>Surmalõks</h1>
-          <h2>11:00</h2>
-          <h4>Estonian</h4>
-          <h4>Action</h4>
-        </div>
-      </div>
-    </div>
-    </a>
-    <a>
-    <div class="movie-item">
-      <div class="movie-group">
-        <img class="stack-img" src="~@/assets/movie-four.jpg">
-        <div class="movie-info" style="padding-left: 2%">
-          <h1>Eternal Love</h1>
-          <h2>22:40</h2>
-          <h4>English</h4>
-          <h4>Romance</h4>
-        </div>
-      </div>
-    </div>
     </a>
   </div>
 </template>
-<style>
-  .whole-page {
-    padding: 3em;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  .movie-item {
-    margin: 10%;
-    background-color: white;
-    color: black;
-    border-radius: 10px;
-  }
 
-  .stack-img {
-    display: flex;
-    float:right;
-    width: 10em;
-    height: 10em;
-    padding: 10px;
-  }
+<style>
+.whole-page {
+  padding: 3em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.movie-item {
+  margin: 10%;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+}
+
+.stack-img {
+  display: flex;
+  float:right;
+  width: 10em;
+  height: 9em;
+  padding: 10px;
+}
 </style>
+
 <script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+let movies = ref([]);
+
+const fetchMovies = async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/movie/all');
+    movies.value = response.data;
+    console.log(movies.value);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+async function sendMovieToBackend(movie) {
+  try {
+    const response = await axios.post('http://localhost:8080/movie', movie);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const movie1 = {
+  "name": "The Syke",
+  "duration": 180,
+  "genre": "Action",
+  "language": "Estonian",
+  "minimumAge": 12,
+  "startTime": "18:30:00"
+};
+
+const movie2 = {
+  "name": "The Syke 2",
+  "duration": 120,
+  "genre": "Romance",
+  "language": "English",
+  "minimumAge": 13,
+  "startTime": "12:30:00"
+};
+
+onMounted(async () => {
+  await fetchMovies();
+  if (movies.value && !movies.value.some(movie => movie.name === movie1.name)) {
+    await sendMovieToBackend(movie1);
+  }
+  if (movies.value && !movies.value.some(movie => movie.name === movie2.name)) {
+    await sendMovieToBackend(movie2);
+  }
+  await fetchMovies();
+});
+
+const formatTime = (time) => {
+  return time ? time.substring(0, 5) : '';
+};
 </script>
