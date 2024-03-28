@@ -49,54 +49,15 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
-let movies = ref([]);
-
-const fetchMovies = async () => {
-  try {
-    const response = await axios.get('http://localhost:8080/movie/all');
-    movies.value = response.data;
-    console.log(movies.value);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-async function sendMovieToBackend(movie) {
-  try {
-    const response = await axios.post('http://localhost:8080/movie', movie);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-const movie1 = {
-  "name": "The Syke",
-  "duration": 180,
-  "genre": "Action",
-  "language": "Estonian",
-  "minimumAge": 12,
-  "startTime": "18:30:00"
-};
-
-const movie2 = {
-  "name": "The Syke 2",
-  "duration": 120,
-  "genre": "Romance",
-  "language": "English",
-  "minimumAge": 13,
-  "startTime": "12:30:00"
-};
-
+const movieId = ref(window.location.pathname.split('/').pop());
+const movie = ref({});
 onMounted(async () => {
-  await fetchMovies();
-  if (movies.value && !movies.value.some(movie => movie.name === movie1.name)) {
-    await sendMovieToBackend(movie1);
+  try {
+    const response = await axios.get(`http://localhost:8080/movie/${movieId.value}`);
+    movie.value = response.data;
+  } catch (error) {
+    console.error(error);
   }
-  if (movies.value && !movies.value.some(movie => movie.name === movie2.name)) {
-    await sendMovieToBackend(movie2);
-  }
-  await fetchMovies();
 });
 
 const formatTime = (time) => {
