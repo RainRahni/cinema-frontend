@@ -1,6 +1,6 @@
 <template>
   <div class="whole-page">
-    <a v-for="movie in movies.values()" :key="movie.id" href="/movie">
+    <a v-for="movie in movies.values()" :key="movie.id" :href="`/movie/${movie.id}`">
       <div class="movie-item">
         <div class="movie-group">
           <img v-if="movie.genre === 'Action'" class="stack-img" src="~@/assets/movie-one.jpg">

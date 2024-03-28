@@ -3,9 +3,9 @@ import HomePage from "@/views/HomePage.vue";
 import MoviePage from "@/views/MoviePage.vue";
 
 const router = createRouter({
-  history: createWebHistory(), // use createWebHistory
+  history: createWebHistory(),
   routes: [
-    { path: '/movie', component: MoviePage },
+    { path: '/movie/:id', component: MoviePage },
     {
       path: '/',
       name: 'home',

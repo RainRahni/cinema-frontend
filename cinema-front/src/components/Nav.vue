@@ -39,5 +39,4 @@ nav a:hover {
 
 </style>
 <script setup>
-import IconProfile from "@/components/icons/IconProfile.vue";
 </script>

@@ -1,6 +1,24 @@
 <template>
-  <div class="whole">
-    <h1 style="color: white">SYKE</h1>
+  <div class="whole-page">
+    <div class="movie-item">
+      <h1 style="color: black">Nimi</h1>
+      <h1 style="color: black">Zanr</h1>
+      <h1 style="color: black">Kellaeg</h1>
+      <h1 style="color: black">Keel</h1>
+      <h1 style="color: black">seatid pilt</h1>
+      <h1 style="color: black">loetuelu vabadest kohadest </h1>
+      <h1 style="color: black">mida soovitatakse</h1>
+
+      <h1 style="color: black">mis row ja tahad</h1>
+      <h1 style="color: black">sisesta nimi</h1>
+      <h1 style="color: black">sisesta email</h1>
+      <h1 style="color: black">button lõpetuseks</h1>
+
+
+
+
+    </div>
+
   </div>
 </template>
 
