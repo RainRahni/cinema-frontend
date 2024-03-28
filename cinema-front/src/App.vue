@@ -10,7 +10,7 @@ import Nav from "@/components/Nav.vue";
 
   <main>
     <div class="wrapper">
-      <HomePage />
+      <router-view />
     </div>
   </main>
 </template>

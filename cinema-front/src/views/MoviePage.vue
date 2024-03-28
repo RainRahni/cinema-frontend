@@ -1,19 +1,6 @@
 <template>
-  <div class="whole-page">
-    <a v-for="movie in movies.values()" :key="movie.id" href="/movie">
-      <div class="movie-item">
-        <div class="movie-group">
-          <img v-if="movie.genre === 'Action'" class="stack-img" src="~@/assets/movie-one.jpg">
-          <img v-else-if="movie.genre === 'Romance'" class="stack-img" src="~@/assets/movie-three.jpg">
-          <div class="movie-info" style="padding-left: 2%">
-            <h1>{{ movie.name }}</h1>
-            <h2>{{ formatTime(movie.startTime) }}</h2>
-            <h4>{{ movie.language }}</h4>
-            <h4>{{ movie.genre }}</h4>
-          </div>
-        </div>
-      </div>
-    </a>
+  <div class="whole">
+    <h1 style="color: white">SYKE</h1>
   </div>
 </template>
 

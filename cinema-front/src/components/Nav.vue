@@ -6,9 +6,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="http://localhost:5173/">Movies</a>
           </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#">Profile</a>
-          </li>
         </div>
       </div>
     </div>
@@ -18,6 +15,7 @@
 
 
 nav a:hover {
+  border-radius: 5px;
   background-color: white;
   color:black;
 }
