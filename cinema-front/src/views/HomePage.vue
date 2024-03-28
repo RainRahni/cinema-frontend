@@ -1,7 +1,7 @@
 <template>
-  <div class="whole-page">
+  <div class="whole-home">
     <a v-for="movie in movies.values()" :key="movie.id" :href="`/movie/${movie.id}`">
-      <div class="movie-item">
+      <div class="movie-card">
         <div class="movie-group">
           <img v-if="movie.genre === 'Action'" class="stack-img" src="~@/assets/movie-one.jpg">
           <img v-else-if="movie.genre === 'Romance'" class="stack-img" src="~@/assets/movie-three.jpg">
@@ -18,13 +18,13 @@
 </template>
 
 <style>
-.whole-page {
+.whole-home {
   padding: 3em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.movie-item {
+.movie-card {
   margin: 10%;
   background-color: white;
   color: black;
