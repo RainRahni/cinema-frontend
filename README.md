@@ -5,7 +5,7 @@ Node.js
 
 1) Clone the repository
 2) Navigate to the project directory:
-  cd cinema-front-end
+  cd cinema-frontend
 3) Install the dependencies:
    npm install
 To start the application:
