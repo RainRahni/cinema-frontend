@@ -3,8 +3,8 @@
     <a v-for="movie in movies.values()" :key="movie.id" :href="`/movie/${movie.id}`">
       <div class="movie-card">
         <div class="movie-group">
-          <img v-if="movie.genre === 'Action'" class="stack-img" src="~@/assets/movie-one.jpg">
-          <img v-else-if="movie.genre === 'Romance'" class="stack-img" src="~@/assets/movie-three.jpg">
+          <img v-if="movie.genre === 'Action'" class="stack-img" src="~@/assets/movie-one.jpg" alt="movie-poster">
+          <img v-else-if="movie.genre === 'Romance'" class="stack-img" src="~@/assets/movie-three.jpg" alt="movie-poster">
           <div class="movie-info" style="padding-left: 2%">
             <h1>{{ movie.name }}</h1>
             <h2>{{ formatTime(movie.startTime) }}</h2>

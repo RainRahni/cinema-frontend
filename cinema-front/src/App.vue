@@ -1,5 +1,4 @@
 <script setup>
-import HomePage from './views/HomePage.vue'
 import Nav from "@/components/Nav.vue";
 </script>
 
@@ -14,7 +13,3 @@ import Nav from "@/components/Nav.vue";
     </div>
   </main>
 </template>
-
-<style scoped>
-
-</style>

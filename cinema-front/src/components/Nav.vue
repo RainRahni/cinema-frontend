@@ -3,9 +3,11 @@
     <div class="container">
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <div class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="http://localhost:5173/">Movies</a>
-          </li>
+          <ul>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="http://localhost:5173/">Movies</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

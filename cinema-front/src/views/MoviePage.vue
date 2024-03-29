@@ -8,7 +8,7 @@
         <h2 style="color: black">{{ movie.genre }}</h2>
       </div>
       <div class="seat-plan">
-        <img src="@/assets/seat-plan.png">
+        <img src="@/assets/seat-plan.png" alt="seat-plan">
         <p style="color: black">{{ falseSeats }}</p>
       </div>
       <div class="forms">
@@ -80,8 +80,8 @@
 </style>
 
 <script setup>
-import { ref, onMounted, computed} from 'vue';
-import { useRouter } from 'vue-router';
+import {computed, onMounted, ref} from 'vue';
+import {useRouter} from 'vue-router';
 import axios from 'axios';
 
 const router = useRouter();
