@@ -11,19 +11,20 @@
         <img src="@/assets/seat-plan.png">
         <p style="color: black">{{ falseSeats }}</p>
       </div>
-
-      <h1 style="color: black">mida soovitatakse</h1>
       <div class="forms">
         <div>
           <input type="text" class="form-control" placeholder="Name" v-model="userName"/>
           <input type="email" class="form-control" placeholder="Email" v-model="email"/>
         </div>
-        <div>
-          <input type="number" class="form-control" placeholder="Row Number" v-model="rowNumber"/>
-          <input type="number" class="form-control" placeholder="Seat Number" v-model="seatNumber"/>
+        <div class="seats">
+          <h4>Row Number:</h4>
+          <input type="number" class="form-control" v-model="rowNumber" :min="1" :max="7"/>
+          <h4>Seat Number:</h4>
+          <input type="number" class="form-control" v-model="seatNumber" :min="1"
+                 :max="getMax()"/>
         </div>
       </div>
-      <a href="/" class="finish" style="width: 100%">Finish</a>
+      <a href="/" class="finish" style="width: 100%" @click.prevent="finishBooking">Finish</a>
     </div>
   </div>
 </template>
@@ -55,6 +56,10 @@
   justify-content: center;
   align-items: center;
 }
+.seats {
+  display: flex;
+  justify-content: space-around;
+}
 .movie-info {
   display: flex;
   flex-direction: column;
@@ -68,18 +73,18 @@
   margin-top: 5%;
   color: #fff;
   &:hover {
-    color: black;
     background-color: green;
     border-radius: 0;
   }
 }
-
 </style>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed} from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
+const router = useRouter();
 const movieId = ref(window.location.pathname.split('/').pop());
 const movie = ref({});
 const userName = ref('');
@@ -94,7 +99,9 @@ onMounted(async () => {
     console.error(error);
   }
 });
-
+const getMax = () => {
+  return rowNumber.value === 1 ? 10 : 13;
+}
 const formatTime = (time) => {
   return time ? time.substring(0, 5) : '';
 };
@@ -131,13 +138,20 @@ const falseSeats = computed(() => {
 });
 const finishBooking = async () => {
   try {
+    let actualSeatNumber = seatNumber.value;
+    if (rowNumber.value > 1) {
+      actualSeatNumber += 10 + 13 * (rowNumber.value - 2);
+    }
     const response = await axios.post('http://localhost:8080/user/', {
       name: userName.value,
-      email: email.value,
-      rowNumber: rowNumber.value,
-      seatNumber: seatNumber.value,
-      movieId: movieId.value
+      email: email.value
+    }, {
+      params: {
+        movieId: movieId.value,
+        seatNumber: actualSeatNumber
+      }
     });
+    await router.push("/");
     console.log(response.data);
   } catch (error) {
     console.error(error);
